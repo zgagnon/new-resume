@@ -34,7 +34,8 @@ jobs:
         with:
           name: PDF
           path: resume.pdf
-      - uses: Shopify/upload-to-release@v1
+      - name: Upload to Release Action
+        uses: Shopify/upload-to-release@v1.0.1
         with:
           name: resume.pdf
           path: resume.pdf
