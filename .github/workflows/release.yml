@@ -34,9 +34,8 @@ jobs:
         with:
           name: PDF
           path: resume.pdf
-      - name: Upload to Release Action
-        uses: Shopify/upload-to-release@v1.0.1
+      - uses: djnicholson/release-action@v2.11
         with:
-          name: resume.pdf
-          path: resume.pdf
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          asset-name: 'zgagnon.pdf'
+          file: 'resume.pdf'
