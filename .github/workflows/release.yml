@@ -34,14 +34,6 @@ jobs:
         with:
           name: PDF
           path: resume.pdf
-      - name: Set up Git
-    		run: |
-    			git config user.name "zgagnon"
-    			git config user.email "zoe@zgagnon.com"
-      - name: Tag the commit
-      		run: |
-      			git tag -a "current" -m "current version"
-      			git push --follow-tags
       - uses: Shopify/upload-to-release@v1
         with:
           name: resume.pdf
