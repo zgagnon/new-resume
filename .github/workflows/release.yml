@@ -3,9 +3,10 @@ name: CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -17,8 +18,12 @@ jobs:
         with:
           latexmk_use_xelatex: true
           root_file: resume.tex
-      - name: Upload PDF file
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Set timestamp
+        id: timestamp
+        run: echo "version=$(date +'%Y.%m.%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+      - name: Create Release
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
         with:
-          name: PDF
-          path: resume.pdf
+          tag_name: v${{ steps.timestamp.outputs.version }}
+          name: Resume ${{ steps.timestamp.outputs.version }}
+          files: resume.pdf
